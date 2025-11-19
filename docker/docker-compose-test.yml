@@ -44,6 +44,8 @@ services:
       - DBSERVICENAME=${DBSERVICENAME}
       # SYS password defined in .env file
       - ORACLE_PWD=${ORACLE_PWD}
+      # set the password for the ODS_PUBLIC_USER database account to be the same as the SYS password defined in .env file
+      - ORDS_PWD=${ORACLE_PWD}
   db-ords-deploy:
     build:
       context: .
@@ -68,6 +70,7 @@ volumes:
       - APP_SCHEMA_NAME=${APP_SCHEMA_NAME}
     restart: "no"
 volumes:
+  # Defines the new shared volume for the APEX static application files
   apex-static-vol:
     name: apex-static-vol
     external: false

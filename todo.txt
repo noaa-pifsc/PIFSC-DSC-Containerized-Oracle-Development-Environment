@@ -5,6 +5,39 @@ _ rename the docker image to have a pifsc prefix instead of a noaa prefix
 		_ ords_apex
 
 
+documentation:
+	X docker container configuration is defined in .env file
+		image names
+		oracle password (defined the same for each admin -> SYSTEM, SYS, apex internal/admin, ORDS)
+		APP_SCHEMA_NAME (checked for presence to determine the database has already been deployed)
+		TARGET_APEX_VERSION
+		
+	X document the names of each container and what their function is
+	
+	X ORDS config (directory is mounted in container to allow changes via repo - custom project-level settings can be saved in version control)
+		X settings.xml
+	
+	
+	How to deploy
+		Clone the repo
+		
+		run the prepare script (to clone all dependencies within the working directory)
+			For custom data system repos add the folders (e.g. DSC, CAS, etc.) and add entries to .gitignore so they aren't added to version control
+			update the scripts so they use relative paths
+		
+		run the docker container (e.g. bash build_deploy_project_dev.sh)
+		
+		
+		
+	X update the configuration documentation for new projects (fork and customize)
+	
+	
+		
+	
+	
+	
+
+
 _ test the different deployment/restart scenarios
 
 	_ dev
@@ -53,8 +86,13 @@ _ ** ORDS_PWD environment variable for ORDS configuration?
 git bash commands:
 
 	cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/pifsc-oracle-developer-environment/deployment_scripts
+	
+	docker compose -f ../docker/docker-compose-dev.yml down
+	
+	docker volume rm apex-static-vol
+	docker volume rm db-vol
+	
 
-	bash prepare_docker_project.sh
 	bash build_deploy_project_dev.sh
 
 	ords --config /etc/ords/config config list --include-defaults | grep "standalone.static"
