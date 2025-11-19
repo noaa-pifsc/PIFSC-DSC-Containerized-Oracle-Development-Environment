@@ -8,8 +8,8 @@ mkdir ../tmp
 # This is where the project dependencies are cloned and added to the development container's file system so they are available when the docker container is built and executed
 echo "clone the project dependencies"
 
-# ***************Insert code to include project dependencies *************** #
-
+# execute the custom prepare docker script that clones any dependencies and populates them in the corresponding /src folders
+source ./custom_prepare_docker_project.sh
 
 
 echo "remove all temporary files"

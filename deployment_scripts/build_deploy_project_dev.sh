@@ -3,9 +3,6 @@
 # change to the directory of the currently running script
 cd "$(dirname "$(realpath "$0")")"
 
-# load the project configuration script to set the runtime variable values
-source ./sh_script_config/project_config.sh
-
 # run the prepare docker project script
 source ./prepare_docker_project.sh
 

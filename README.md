@@ -56,19 +56,16 @@ There are two different runtime scenarios implemented in this project:
 -   Clone the forked project to a working directory
 -   Update the forked project in the working directory
     -   Update the [documentation](./README.md) to reference all of the repositories that are used to build the image and deploy the container
-    -   Update the [prepare_docker_project.sh](./deployment_scripts/prepare_docker_project.sh) bash script to retrieve DB/app files for all dependencies (if any) as well as the DB/app files for the given data system and place them in the appropriate subfolders in the [src folder](./docker/src)
-    -   Update the [project_config.sh](./deployment_scripts/sh_script_config/project_config.sh) bash script to specify the respository URL(s) needed to clone the container dependencies
+    -   Update the [custom_prepare_docker_project.sh](./deployment_scripts/custom_prepare_docker_project.sh) bash script to retrieve DB/app files for all dependencies (if any) as well as the DB/app files for the given data system and place them in the appropriate subfolders in the [src folder](./docker/src)
+    -   Update the [custom_project_config.sh](./deployment_scripts/sh_script_config/custom_project_config.sh) bash script to specify the respository URL(s) needed to clone the container dependencies
     -   Update the [.env](./docker/.env) environment to specify the configuration values:
         -   ORACLE_PWD is the password for the SYS, SYSTEM database schema passwords, the Apex administrator password, the ORDS administrator password
         -   TARGET_APEX_VERSION is the version of Apex that will be installed
         -   APP_SCHEMA_NAME is the database schema that will be used to check if the database schemas have been installed, this only applies to the development [runtime scenario](#runtime-scenarios)
         -   DB_IMAGE is the path to the database image used to build the database contianer (db container)
         -   ORDS_IMAGE is the path to the ORDS image used to build the ORDS/Apex container (ords container)
-    -   Update the docker compose configuration files for each [runtime scenario](#runtime-scenarios)
-        -   [docker-compose-dev.yml](./docker/docker-compose-dev.yml) defines the configuration for the development scenario
-        -   [docker-compose-test.yml](./docker/docker-compose-test.yml) defines the configuration for the testing scenario
     -   Update the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script to execute a series of SQLPlus scripts in the correct order to create/deploy schemas, create Apex workspaces, and deploy Apex apps that were copied to the /src directory when the [prepare_docker_project.sh](./deployment_scripts/prepare_docker_project.sh) script is executed. This process can be customized for any Oracle data system.
-    -   Update the [container_config.sh](./docker/src/deployment_scripts/config/container_config.sh) to specify the variables necessary to authenticate the corresponding SQLPlus scripts when the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script is executed
+        -   Update the [container_config.sh](./docker/src/deployment_scripts/config/custom_container_config.sh) to specify the variables necessary to authenticate the corresponding SQLPlus scripts when the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script is executed
 
 -   ### Implementation Examples
     -   Single database with no dependencies: [DSC ODE project](https://picgitlab.nmfs.local/oracle-developer-environment/dsc-pifsc-oracle-developer-environment)
