@@ -1,7 +1,16 @@
 #! /bin/sh
 
-# change to the directory the script is running in
-cd "$(dirname "$(realpath "$0")")"/../docker
+# change to the directory of the currently running script
+cd "$(dirname "$(realpath "$0")")"
+
+# load the project configuration script to set the runtime variable values
+source ./sh_script_config/project_config.sh
+
+# run the prepare docker project script
+source ./prepare_docker_project.sh
+
+# change to the docker directory:
+cd ../docker
 
 # build and execute the docker container for the development scenario
 docker-compose -f docker-compose-dev.yml up -d  --build

@@ -18,5 +18,3 @@ RUN dos2unix /usr/src/*.sh
 WORKDIR /usr/src
 
 CMD ["bash", "/usr/src/run_db_app_deployment.sh"]
-
-# CMD tail -f /dev/null

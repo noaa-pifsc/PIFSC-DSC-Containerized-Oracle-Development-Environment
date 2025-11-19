@@ -2,30 +2,19 @@
 
 echo "Running the custom database/apex deployment process"
 
-# Database connection details
-DB_HOST="${DBHOST}"
-DB_PORT="${DBPORT}"
-DB_SID="${DBSERVICENAME}"
-DB_USER="sys"
-DB_PASSWORD="${ORACLE_PWD}"
-DB_ROLE="SYSDBA"
-APP_SCHEMA_NAME="${APP_SCHEMA_NAME}"
-
 # --- Validations ---
-if [ -z "${DB_PASSWORD}" ]; then
+if [ -z "${ORACLE_PWD}" ]; then
   echo "ERROR: ORACLE_PWD environment variable is not set. Halting."
   exit 1
 fi
-if [ -z "${DB_HOST}" ]; then
-  echo "ERROR: DB_HOSTNAME environment variable is not set. Halting."
+if [ -z "${DBHOST}" ]; then
+  echo "ERROR: DBHOST environment variable is not set. Halting."
   exit 1
 fi
 if [ -z "${APP_SCHEMA_NAME}" ]; then
   echo "ERROR: APP_SCHEMA_NAME environment variable is not set. Halting."
   exit 1
 fi
-
-SYS_CREDENTIALS="$DB_USER/$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_SID as $DB_ROLE"
 
 # define a query to check if APEX is installed
 APEX_QUERY="SELECT COUNT(*) FROM DBA_REGISTRY WHERE COMP_ID = 'APEX' AND STATUS = 'VALID';"
@@ -143,7 +132,7 @@ EOF
   
   # Clear out any old 'images' folder and move the new one in.
   rm -rf ${APEX_STATIC_DIR}/*
-  # Move the *contents* of the images folder to the root of the volume
+  # Move the contents of the images folder to the root of the volume and update owner permissions on the volume to the oracle account
   mv /tmp/apex/images/* ${APEX_STATIC_DIR}/
   chown -R 54321:0 ${APEX_STATIC_DIR}/
   FILE_COPY_STATUS=$? 
@@ -168,7 +157,7 @@ EOF
 		WHENEVER SQLERROR EXIT SQL.SQLCODE
 		ALTER SESSION SET CONTAINER = XEPDB1;
 		-- Use the same password for all internal accounts for simplicity
-		ALTER USER APEX_PUBLIC_USER IDENTIFIED BY "${DB_PASSWORD}" ACCOUNT UNLOCK;
+		ALTER USER APEX_PUBLIC_USER IDENTIFIED BY "${ORACLE_PWD}" ACCOUNT UNLOCK;
 		
 		-- Disable Strong Password Requirement (For Dev Environment)
 		BEGIN
@@ -177,23 +166,23 @@ EOF
 		END;
 		/
 
-		-- Set the ADMIN password for the INTERNAL workspace (based on DB_PASSWORD variable defined in .env file)
+		-- Set the ADMIN password for the INTERNAL workspace (based on ORACLE_PWD variable defined in .env file)
 		BEGIN
 			APEX_UTIL.set_security_group_id(10);
 			APEX_UTIL.create_user(
 				p_user_name => 'ADMIN',
 				p_email_address => 'admin@localhost',
-				p_web_password=> '${DB_PASSWORD}',
+				p_web_password=> '${ORACLE_PWD}',
 				p_developer_privs => 'ADMIN:CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL',
 				p_change_password_on_first_use => 'N' -- Ensure no forced change password
 			);
 			COMMIT;
 		EXCEPTION WHEN OTHERS THEN
-			-- If apex admin user already exists, just reset the password (based on DB_PASSWORD variable defined in .env file)
+			-- If apex admin user already exists, just reset the password (based on ORACLE_PWD variable defined in .env file)
 			APEX_UTIL.reset_password(
 				p_user_name => 'ADMIN',
 				p_old_password => NULL,
-				p_new_password => '${DB_PASSWORD}',
+				p_new_password => '${ORACLE_PWD}',
 				p_change_password_on_first_use => FALSE -- Ensure no forced change password
 			);
 			COMMIT;

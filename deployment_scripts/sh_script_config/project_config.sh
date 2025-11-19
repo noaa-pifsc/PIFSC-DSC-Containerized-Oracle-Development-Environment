@@ -1,5 +1,9 @@
-root_directory="/c"
+#! /bin/sh
 
-project_directory="$root_directory/docker/pifsc-oracle-developer-environment"
+# define the git urls for the Oracle Development Environment dependencies:
 
-ode_git_url="git@picgitlab.nmfs.local:oracle-developer-environment/pifsc-oracle-developer-environment.git"
+
+# define the SYS credentials for use in deployment scripts based on environment variables:
+SYS_CREDENTIALS="SYS/${ORACLE_PWD}@${DBHOST}:${DBPORT}/${DBSERVICENAME} as SYSDBA"
+
+

@@ -1,8 +1,12 @@
 _ rename the docker image to have a pifsc prefix instead of a noaa prefix
 	_ rename the container names:
-		_ auto_db_app_deploy
-		_ db_container
-		_ ords_apex
+		X auto_db_app_deploy
+		X db_container
+		X ords_apex
+
+_ create a new script to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
+	_ rename the main script to be initialize/upgrade ords
+
 
 
 documentation:
