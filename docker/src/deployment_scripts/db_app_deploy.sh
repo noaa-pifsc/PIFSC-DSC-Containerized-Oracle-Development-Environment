@@ -4,6 +4,9 @@
 CURRENT_DIR="$(dirname "$(realpath "$0")")"
 cd ${CURRENT_DIR}
 
+# load the custom container configuration file (to define custom credentials)
+source ./config/custom_container_config.sh
+
 # define the SYS credentials for use in deployment scripts based on environment variables:
 SYS_CREDENTIALS="SYS/${ORACLE_PWD}@${DBHOST}:${DBPORT}/${DBSERVICENAME} as SYSDBA"
 
