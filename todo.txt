@@ -4,8 +4,7 @@ _ rename the docker image to have a pifsc prefix instead of a noaa prefix
 		X db_container
 		X ords_apex
 
-_ create a new script to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
-	_ rename the main script to be initialize/upgrade ords
+X create a new script (custom_ prefix) to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
 
 
 
@@ -56,7 +55,17 @@ documentation:
 		
 	
 	
+_ ** document the upstream pull process in the customization section of the documentation
+	indicate which file updates to ignore (begins with custom_)
 	
+	.env must be merged since each use case will define a different APP_SCHEMA_NAME value
+	
+	Also document how the changes must be propagated through the fork dependency hierarchy
+	
+	_ look into how to implement the fork network in github (this can be transferred, but it is additional work)
+		It's early on so it might be best to do this sooner than later -> this could be shared with other FMCs if they are interested in a similar generalized solution
+
+
 
 
 _ test the different deployment/restart scenarios
@@ -65,7 +74,7 @@ _ test the different deployment/restart scenarios
 		_ new deployment
 		_ restart
 		_ ords works (do a simple API setup and confirm we can pull the data)
-	_ test (does not save database volume or apex static files)
+	_ test (does not save database volume)
 		_ new deployment
 		_ ords works (do a simple API setup and confirm we can pull the data)
 	
@@ -75,7 +84,7 @@ _ test the different deployment/restart scenarios
 	_ test with CAS or other app to ensure that the schemas are created successfully and the apex app is run successfully
 		
 
-_ update the documentation to reference the authorization key instead of logging in to oracle container registry with the username/password
+X update the documentation to reference the authorization key instead of logging in to oracle container registry with the username/password
 
 
 X Update the versions of Oracle XE and ORDS in this repo and then allow the downstream repos to pull those changes to propagate the changes
@@ -114,8 +123,6 @@ git bash commands:
 	
 
 	bash build_deploy_project_dev.sh
-
-	ords --config /etc/ords/config config list --include-defaults | grep "standalone.static"
 
 troubleshooting tips:
 	If the project is not working as expected when it is prepared using prepare_docker_project.sh:

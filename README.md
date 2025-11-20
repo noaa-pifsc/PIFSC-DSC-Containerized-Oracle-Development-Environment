@@ -6,7 +6,7 @@ The PIFSC Oracle Developer Environment (ODE) project was developed to provide a 
 ## Resources
 -   ### ODE Version Control Information
     -   URL: https://picgitlab.nmfs.local/oracle-developer-environment/pifsc-oracle-developer-environment
-    -   Version: 1.0 (git tag: ODE_v1.0)
+    -   Version: 1.1 (git tag: ODE_v1.1)
 -   [ODE Demonstration Outline](./docs/demonstration_outline.md)
 -   [ODE Repository Fork Diagram](./docs/ODE_fork_diagram.drawio.png)
     -   [ODE Repository Fork Diagram source code](./docs/ODE_fork_diagram.drawio)
@@ -51,14 +51,14 @@ There are two different runtime scenarios implemented in this project:
 
 ## Automated Deployment Process
 -   ### Prepare the folder structure
-	-   The [prepare_docker_project.sh](./deployment_scripts/prepare_docker_project.sh) bash script is automatically executed when the deployment script for either [runtime scenario](#runtime-scenario) is executed.  
-	-   The script prepares the working copy of the repository by dynamically retrieving the DB/app files for all dependencies (if any) as well as the DB/app files for the given data system which will be used to build and run the ODE container
+    -   The [prepare_docker_project.sh](./deployment_scripts/prepare_docker_project.sh) bash script is automatically executed when the deployment script for either [runtime scenario](#runtime-scenario) is executed.  
+    -   The script prepares the working copy of the repository by dynamically retrieving the DB/app files for all dependencies (if any) as well as the DB/app files for the given data system which will be used to build and run the ODE container
 -   ### Build and Run the container 
-	-   Choose a runtime scenario:
-		-   [Development](#development): The [build_deploy_project_dev.sh](./deployment_scripts/build_deploy_project_dev.sh) bash script is intended for development purposes   
-			-   This scenario retains the Oracle data in the database when the container starts by specifying a docker volume for the Oracle data folder so developers can pick up where they left off
-		-   [Test](#test): The [build_deploy_project_test.sh](./deployment_scripts/build_deploy_project_test.sh) bash script is intended for testing purposes
-			-   This scenario does not retain any Oracle data in the database so it can be used to deploy schemas and/or Apex applications to a blank database instance for a variety of test scenarios.    
+    -   Choose a runtime scenario:
+        -   [Development](#development): The [build_deploy_project_dev.sh](./deployment_scripts/build_deploy_project_dev.sh) bash script is intended for development purposes   
+            -   This scenario retains the Oracle data in the database when the container starts by specifying a docker volume for the Oracle data folder so developers can pick up where they left off
+        -   [Test](#test): The [build_deploy_project_test.sh](./deployment_scripts/build_deploy_project_test.sh) bash script is intended for testing purposes
+            -   This scenario does not retain any Oracle data in the database so it can be used to deploy schemas and/or Apex applications to a blank database instance for a variety of test scenarios.    
 
 ## Customization Process
 -   \*Note: this process will fork the ODE parent repository and repurpose it as a project-specific ODE
@@ -77,6 +77,15 @@ There are two different runtime scenarios implemented in this project:
         -   ORDS_IMAGE is the path to the ORDS image used to build the ORDS/Apex container (ords container)
     -   Update the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script to execute a series of SQLPlus scripts in the correct order to create/deploy schemas, create Apex workspaces, and deploy Apex apps that were copied to the /src directory when the [prepare_docker_project.sh](./deployment_scripts/prepare_docker_project.sh) script is executed. This process can be customized for any Oracle data system.
         -   Update the [custom_container_config.sh](./docker/src/deployment_scripts/config/custom_container_config.sh) to specify the variables necessary to authenticate the corresponding SQLPlus scripts when the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script is executed
+    -   Create empty directories for any folders/files dynamically retrieved by [custom_prepare_docker_project.sh](./deployment_scripts/custom_prepare_docker_project.sh) (e.g. docker/src/DSC) and save .gitkeep files for them (e.g. docker/src/DSC/.gitkeep) so they can be added to version control
+        -   Create a .gitignore file at the root of the repository to add entries for any empty directories that have content dynamically retrieved, for example a "DSC" folder:
+        ```
+        # Ignore all content in the DSC directory
+        docker/src/DSC/*
+
+        # Do not ignore the .gitkeep file for the DSC directory, so the directory itself is tracked.
+        !docker/src/DSC/.gitkeep
+        ```
 -   ### Implementation Examples
     -   Single database with no dependencies: [DSC ODE project](https://picgitlab.nmfs.local/oracle-developer-environment/dsc-pifsc-oracle-developer-environment)
     -   Database and Apex app with a single database dependency: [Centralized Authorization System (CAS) ODE project](https://picgitlab.nmfs.local/oracle-developer-environment/cas-pifsc-oracle-developer-environment)
