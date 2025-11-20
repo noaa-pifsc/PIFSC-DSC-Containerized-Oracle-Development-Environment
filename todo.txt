@@ -22,3 +22,15 @@ git bash commands:
 	
 
 	bash build_deploy_project_dev.sh
+
+
+need ITS to allow container-registry.oracle.com
+
+
+
+DSC -> 
+	started at 6:08 AM
+	ended at 6:20 AM
+
+	started at 6:30 AM
+	
