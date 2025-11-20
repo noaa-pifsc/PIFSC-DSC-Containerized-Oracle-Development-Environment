@@ -2,8 +2,6 @@
 
 echo "running container preparation script"
 
-# load the project configuration script to set the runtime variable values
-source ./sh_script_config/project_config.sh
 
 # clean out the tmp folder and then recreate the tmp folder to dynamically load the files into 
 rm -rf ../tmp
@@ -29,4 +27,4 @@ echo "clone the project dependencies"
 echo "remove all temporary files"
 rm -rf ../tmp
 
-echo "the docker project files are now ready for configuration and image building/deployment"
+echo "the docker project files are now ready for configuration and image building/running"

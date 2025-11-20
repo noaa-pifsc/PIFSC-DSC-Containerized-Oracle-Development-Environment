@@ -17,4 +17,4 @@ RUN dos2unix /usr/src/*.sh
 # change directory to the SQL source directory
 WORKDIR /usr/src
 
-CMD ["bash", "/usr/src/run_db_app_deployment.sh"]
+CMD ["bash", "/usr/src/deployment_scripts/db_app_deploy.sh"]
