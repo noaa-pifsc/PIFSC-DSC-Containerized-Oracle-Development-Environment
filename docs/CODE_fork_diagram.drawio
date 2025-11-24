@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0" version="29.1.1">
+  <diagram name="Page-1" id="5x21xzw7pKY_CYzqWRJj">
+    <mxGraphModel dx="2066" dy="1111" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-1" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;PIFSC Containerized Oracle Developer Environment (CODE) Repository Fork Diagram&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-2" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="CODE" vertex="1">
+          <mxGeometry height="130" width="110" x="525" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-3" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="DSC CODE" vertex="1">
+          <mxGeometry height="130" width="110" x="365" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-4" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;(example)&lt;/b&gt;&lt;div&gt;LIFEHIST PIFSC CODE&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="110" x="635" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-5" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-2" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=75;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="300" as="sourcePoint" />
+            <mxPoint x="600" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-6" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-4" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=90;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=classic;startFill=1;endFill=0;" target="SCLX1SmKLz5k2Fn8iWNY-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="660" y="300" as="sourcePoint" />
+            <mxPoint x="710" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-7" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Centralized Authorization System (CAS) CODE" vertex="1">
+          <mxGeometry height="130" width="110" x="365" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-8" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-3" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="660" y="300" as="sourcePoint" />
+            <mxPoint x="710" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-9" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="PARR Tools CODE" vertex="1">
+          <mxGeometry height="130" width="110" x="210" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-10" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-7" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=90;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="660" y="700" as="sourcePoint" />
+            <mxPoint x="710" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-11" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;(example)&lt;/b&gt;&lt;div&gt;MOUSS CODE&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="110" x="525" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-12" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-7" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=90;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-11" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="660" y="500" as="sourcePoint" />
+            <mxPoint x="710" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-13" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;(example)&lt;/b&gt;&lt;div&gt;SPTT CODE&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="110" x="900" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-14" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-3" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="400" as="sourcePoint" />
+            <mxPoint x="600" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-15" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;(example)&lt;/b&gt;&lt;div&gt;Longline Cost Earnings (LCE) CODE&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="110" x="90" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="SCLX1SmKLz5k2Fn8iWNY-16" edge="1" parent="1" source="SCLX1SmKLz5k2Fn8iWNY-3" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=90;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="SCLX1SmKLz5k2Fn8iWNY-15" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="400" as="sourcePoint" />
+            <mxPoint x="600" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

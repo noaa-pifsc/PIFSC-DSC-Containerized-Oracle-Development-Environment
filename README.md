@@ -5,7 +5,7 @@ The PIFSC Containerized Oracle Developer Environment (CODE) project was develope
 
 ## Resources
 -   ### CODE Version Control Information
-    -   URL: https://picgitlab.nmfs.local/oracle-developer-environment/pifsc-oracle-developer-environment
+    -   URL: https://github.com/noaa-pifsc/PIFSC-Containerized-Oracle-Development-Environment
     -   Version: 1.1 (git tag: CODE_v1.1)
 -   [CODE Demonstration Outline](./docs/demonstration_outline.md)
 -   [CODE Repository Fork Diagram](./docs/CODE_fork_diagram.drawio.png)
@@ -32,7 +32,7 @@ The PIFSC Containerized Oracle Developer Environment (CODE) project was develope
 -   The CODE repository is intended to be forked for specific data systems
 -   The [CODE Repository Fork Diagram](./docs/CODE_fork_diagram.drawio.png) shows the different example and actual forked repositories that could be part of the suite of CODE repositories for different data systems
     -   The implemented repositories are shown in blue:
-        -   [CODE](https://picgitlab.nmfs.local/oracle-developer-environment/pifsc-oracle-developer-environment)
+        -   [CODE](https://github.com/noaa-pifsc/PIFSC-Containerized-Oracle-Development-Environment)
             -   The CODE is the first repository shown at the top of the diagram and serves as the basis for all forked repositories for specific data systems
         -   [DSC CODE](https://picgitlab.nmfs.local/oracle-developer-environment/dsc-pifsc-oracle-developer-environment)
         -   [Centralized Authorization System (CAS) CODE](https://picgitlab.nmfs.local/oracle-developer-environment/cas-pifsc-oracle-developer-environment)
@@ -108,7 +108,7 @@ There are two different runtime scenarios implemented in this project:
     -   This container waits until the db container is running and the service is healthy
 -   The db_ords_deploy container is built from a custom dockerfile that uses an official Oracle InstantClient image with some custom libraries installed and copies the source code from the [src folder][./docker/src].  
     -   This container waits until the db container is running and the service is healthy and Apex has been installed on the database container
-    -   This container runs the [run_db_app_deployment.sh](./docker/src/run_db_app_deployment.sh) bash script to deploy all database schemas, Apex workspaces, and Apex apps
+    -   This container runs the [db_app_deploy.sh](./docker/src/deployment_scripts/db_app_deploy.sh) bash script to deploy all database schemas, Apex workspaces, and Apex apps
     -   Once the db_ords_deploy container finishes deploying the database schemas/apps the container will shut down.  
 
 ## Connection Information
