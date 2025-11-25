@@ -1,19 +1,20 @@
 
 
-_ merge upstream changes from branch_implement_upgradable_ords_apex
-	_ test new functionality 
-		ords
-		apex
-		database
+X merge upstream changes from branch_implement_upgradable_ords_apex
+	X test new functionality 
+		X ords
+		X apex
+		X database
 
-	_ update .gitignore
+	X update .gitignore
 
-	_ update documentation
+	X update documentation
 	
 
 
 git bash commands:
 
+	# stop and remove CODE containers and delete volumes
 	cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-DSC-Containerized-Oracle-Development-Environment/deployment_scripts
 	
 	docker compose -f ../docker/docker-compose-dev.yml down
