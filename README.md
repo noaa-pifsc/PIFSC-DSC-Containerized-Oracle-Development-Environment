@@ -34,8 +34,8 @@ The PIFSC Containerized Oracle Developer Environment (CODE) project was develope
     -   The implemented repositories are shown in blue:
         -   [CODE](https://github.com/noaa-pifsc/PIFSC-Containerized-Oracle-Development-Environment)
             -   The CODE is the first repository shown at the top of the diagram and serves as the basis for all forked repositories for specific data systems
-        -   [DSC CODE](https://picgitlab.nmfs.local/oracle-developer-environment/dsc-pifsc-oracle-developer-environment)
-        -   [Centralized Authorization System (CAS) CODE](https://picgitlab.nmfs.local/oracle-developer-environment/cas-pifsc-oracle-developer-environment)
+        -   [DSC CODE](https://github.com/noaa-pifsc/PIFSC-DSC-Containerized-Oracle-Development-Environment)
+        -   [Centralized Authorization System (CAS) CODE](https://github.com/noaa-pifsc/PIFSC-CAS-Containerized-Oracle-Development-Environment)
     -   The examples or repositories that have not been implemented yet are shown in orange  
 ![CODE Repository Fork Diagram](./docs/CODE_fork_diagram.drawio.png)
 
@@ -88,9 +88,9 @@ There are two different runtime scenarios implemented in this project:
             !docker/src/DSC/.gitkeep
             ```
     -   ### Implementation Examples
-        -   Single database with no dependencies: [DSC CODE project](https://picgitlab.nmfs.local/oracle-developer-environment/dsc-pifsc-oracle-developer-environment)
-        -   Database and Apex app with a single database dependency: [Centralized Authorization System (CAS) CODE project](https://picgitlab.nmfs.local/oracle-developer-environment/cas-pifsc-oracle-developer-environment)
-        -   Database and Apex app with two levels of database dependencies and an application dependency: [PARR Tools CODE project](https://picgitlab.nmfs.local/oracle-developer-environment/parr-tools-pifsc-oracle-developer-environment)
+        -   Single database with no dependencies: [DSC CODE project](https://github.com/noaa-pifsc/PIFSC-DSC-Containerized-Oracle-Development-Environment)
+        -   Database and Apex app with a single database dependency: [Centralized Authorization System (CAS) CODE project](https://github.com/noaa-pifsc/PIFSC-CAS-Containerized-Oracle-Development-Environment)
+        -   Database and Apex app with two levels of database dependencies and an application dependency: [PARR Tools CODE project](https://github.com/noaa-pifsc/PIFSC-PARR-Tools-Containerized-Oracle-Development-Environment)
 -   ### Upstream Updates
     -   Most upstream file updates can be accepted without changes, except for the following files that should be merged (to integrate any appropriate upstream updates) or rejected (Keep HEAD revision) based on their function:
         -   Merge:
