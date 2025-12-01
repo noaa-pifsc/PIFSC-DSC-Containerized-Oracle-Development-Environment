@@ -33,6 +33,14 @@ X rename the docker image to have a pifsc prefix
 X create a new script (custom_ prefix) to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
 
 
+_ refactor the bash functions
+
+_ create functions for validating the required environment variables
+
+
+
+
+
 Testing:
 	_ test the different deployment/restart scenarios
 		_ dev
