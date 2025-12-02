@@ -20,13 +20,6 @@ To do:
 	X update the db_app_deploy.sh code to check if the TARGET_APEX_VERSION is < the installed version and print out an error message and exit with a code = 1
 
 
-_ troubleshoot error on downgrade (23.2 to 23.1)
-	2025-11-26 08:38:51 db-ords-deploy  | Checking database for APEX version...
-	2025-11-26 08:38:51 db-ords-deploy  | /usr/src/deployment_scripts/db_app_deploy.sh: line 97: [[: 2.0: syntax error: invalid arithmetic operator (error token is ".0")
-	2025-11-26 08:38:51 db-ords-deploy  | APEX version mismatch. Found: '23.2.0'
-	2025-11-26 08:38:51 db-ords-deploy  | Starting APEX upgrade to 23.1...
-
-
 X rename the docker image to have a pifsc prefix
 	X pifsc/db_ords_deploy
 

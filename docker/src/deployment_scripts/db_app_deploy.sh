@@ -21,8 +21,6 @@ echo "Running the custom database/apex deployment process"
 # define a query to check if APEX is installed
 APEX_QUERY="SELECT COUNT(*) FROM DBA_REGISTRY WHERE COMP_ID = 'APEX' AND STATUS = 'VALID';"
 
-echo "The value of APEX_QUERY is: $APEX_QUERY"
-
 # Reads the target apex version from the environment variable set in docker-compose.yml
 # Defaults to 24.2 if not set
 TARGET_APEX_VERSION=${TARGET_APEX_VERSION:-"23.2"}
