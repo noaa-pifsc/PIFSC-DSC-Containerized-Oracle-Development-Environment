@@ -1,7 +1,8 @@
 # Use official Oracle Linux slim image
 FROM ghcr.io/oracle/oraclelinux8-instantclient:19
 
-RUN yum install dos2unix traceroute \
+# install required libraries
+RUN yum install dos2unix curl unzip \
 && yum clean all
 
 # set the timezone of the linux container to UTC
@@ -11,11 +12,9 @@ ENV TZ=UTC
 COPY ./src /usr/src
 
 # convert the shell script to unix line endings
-RUN dos2unix /usr/src/*.sh 
+RUN find /usr/src -type f \( -name "*.sh" \) -exec dos2unix {} +
 
 # change directory to the SQL source directory
 WORKDIR /usr/src
 
-CMD ["bash", "/usr/src/run_db_app_deployment.sh"]
-
-# CMD tail -f /dev/null 
+CMD ["bash", "/usr/src/deployment_scripts/db_app_deploy.sh"]

@@ -1,44 +1,189 @@
-Credentials:
+To do:
+	X ** Update all repositories to add "containerized" to the name and use CODE as the acronym
 
-	Oracle:
-		Port: 1521
-		Host: localhost:8181
-		SID: XEPDB1
-		username: system
-		password: pwd
-		
-		system/"pwd"@localhost:1521/XEPDB1
-		
-		cd C:\Users\jesse.abdul\Documents\Version Control\Git\pifsc-dsc\SQL
-		sqlplus /nolog
-		@queries/dev_container_setup/dev_container_create_DSC_schema.sql
-		sys/"pwd"@localhost:1521/XEPDB1
-		
-		sqlplus /nolog
-		@dev_container_setup/container_deploy_dev.sql
-		DSC/"containerpw"@localhost:1521/XEPDB1
-
-		
-		sqlplus /nolog
-		@dev_container_setup/container_deploy_dev.sql
-		CAS/"containerpw"@localhost:1521/XEPDB1
-
-		
-		
-	APEX:
-		http://localhost:8181/ords/apex
-		Workspace: internal
-		User:      ADMIN
-		Password:  Welcome_1 
+	X Update the repo paths
+	
+	X Migrate to github and maintain forks
+		X Pull upstream changes
+	
+	X Update documentation URLs
+	
+	X Test containers
+	
+	X Implement the ORDS functionality and determine what code is necessary to define ORDS endpoints
 	
 
+	_ look into the DB/APEX configuration files from DBA
 
-bugs:
-	_ copy the conn_string.txt to the container each time it runs
-		create a dockerfile for the ords-developer image
+	X check if the given apex version is actually available (e.g. 23.0), if not then print an error mesasge and exit with code = 1
+
+	X update the db_app_deploy.sh code to check if the TARGET_APEX_VERSION is < the installed version and print out an error message and exit with a code = 1
+
+
+X rename the docker image to have a pifsc prefix
+	X pifsc/db_ords_deploy
+
+X create a new script (custom_ prefix) to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
+
+
+X refactor the bash functions
+
+X create functions for validating the required environment variables
+
+
+
+
+
+Testing:
+	X test the different deployment/restart scenarios
+		X dev (tested 12/2/25)
+			X new deployment
+				X apex
+					X (error message) TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
+					X (error message) TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
+					X valid APEX (successful and reset admin password to ${ORACLE_PWD}
+						X login to workspace
+				X db
+					X login to SYS
+					X login to SYSTEM
+			X restart
+				X change APEX version
+					X TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
+					X (error message) downgrade (e.g. 23.1, 22.1)
+					X (error message) TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
+					X APEX upgrade (successful and reset admin password to ${ORACLE_PWD}
+						X login to workspace
+						X db
+							X login to SYS
+							X login to SYSTEM
+				X leave APEX version unchanged
+					X login to workspace (password unchanged)
+					X db
+						X login to SYS
+						X login to SYSTEM
+		X test (does not save database volume) (tested 12/2/25)
+			X apex
+				X (error message) TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
+				X (error message) TARGET_APEX_VERSION invalid version (oracle site does not 
+				X valid APEX (successful upgrade and reset admin password to ${ORACLE_PWD}
+					X login to workspace
+			X db
+				X login to SYS
+				X login to SYSTEM
+
+
+
+
+
+documentation:
+	X docker container configuration is defined in .env file
+		image names
+		oracle password (defined the same for each admin -> SYSTEM, SYS, apex internal/admin, ORDS)
+		APP_SCHEMA_NAME (checked for presence to determine the database has already been deployed)
+		TARGET_APEX_VERSION
 		
-	Issue with the image not being able to download from the container registry
+	X document the names of each container and what their function is
 	
+	X ORDS config (directory is mounted in container to allow changes via repo - custom project-level settings can be saved in version control)
+		X settings.xml
+	
+	
+	How to deploy
+		Clone the repo
+		
+		
+		run the docker container (e.g. bash build_deploy_project_dev.sh)
+			automatically run the prepare script (to clone all dependencies within the working directory)
+				For custom data system repos add the folders (e.g. DSC, CAS, etc.) and add entries to .gitignore so they aren't added to version control
+
+		X identify all custom scripts that will change for custom projects
+			X custom_prepare_docker_project.sh
+			X custom_project_config.sh
+			X custom_db_app_deploy.sh
+			X custom_container_config.sh
+			X .env
+				
+		
+	X update the configuration documentation for new projects (fork and customize)
+	
+	
+		
+	
+	
+X ** document the upstream pull process in the customization section of the documentation
+	indicate which file updates to ignore (begins with custom_)
+	
+	X .env must be merged since each use case will define a different APP_SCHEMA_NAME value
+	
+	X Also document how the changes must be propagated through the fork dependency hierarchy
+	
+X implement the fork network in github
+	It's early on so it might be best to do this sooner than later -> this could be shared with other FMCs if they are interested in a similar generalized solution
+		
+
+X update the documentation to reference the authorization key instead of logging in to oracle container registry with the username/password
+
+
+X Update the versions of Oracle XE and ORDS in this repo and then allow the downstream repos to pull those changes to propagate the changes
+	X dockerfile now allows .env configuration file to specify the version of oracle xe, ords, and apex
+
+
+
+
+
+X VS Code can be used for markdown
+
+X document the login to oracle registry
+
+X remove traceroute from dockerfile
+
+X update the ords-developer image (implement dockerfile) to copy the conn_string.txt file into the appropriate folder so it doesn't disappear each time the container is run
+	X uses .env file instead
+		X set password, ports, etc. in ENV file
+
+X pull the upstream README.md changes into the repo
+
+
+
+X ** ORDS_PWD environment variable for ORDS configuration?
+	** Ensure that ORDS is setup correctly for those types of projects (e.g. ORDS API for web app)
+	"INFO : ORDS_PWD env var is not set, using generated value"
+
+git bash commands:
+
+	# Dev:
+
+		# stop and remove CODE containers and delete volumes
+		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment/deployment_scripts
+		
+		docker compose -f ../docker/docker-compose-dev.yml down
+		docker volume rm apex-static-vol
+		docker volume rm db-vol
+		
+		# build and deploy the development scenario of the CODE
+		bash build_deploy_project_dev.sh
+	
+	# Test:
+
+		# stop and remove CODE containers and delete volumes
+		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment/deployment_scripts
+		
+		docker compose -f ../docker/docker-compose-test.yml down
+		docker volume rm apex-static-vol
+
+		# build and deploy the test scenario of the CODE
+		bash build_deploy_project_test.sh
+
+
+troubleshooting tips:
+	Is the project_config.sh correct?
+		Does it point at a different project_folder_name than the prepared directory?
+		
+		
+
+
+	X Issue with the image not being able to download from the container registry
+		X submit SCR to allow PIFSC network (hardwired and VPN) to access container-registry.oracle.com
 
 
 
@@ -63,12 +208,12 @@ To do:
 		X How to fork and customize the project
 		
 	
-	_ build out the DSC example first
-		_ get an export of all objects in the DSC schema from production
-	_ build out the CAS example next
+	X build out the DSC example first
+		X get an export of all objects in the DSC schema from production
+	X build out the CAS example next
 	_ build out the PARR Tools example next
-	_ Then build out the generalized upstream repo that can be forked for any given data system and that the upstream changes can be pulled moving forward
-	_ fork the generalized docker stack repo to create the DSC and CAS repos
+	X Then build out the generalized upstream repo that can be forked for any given data system and that the upstream changes can be pulled moving forward
+	X fork the generalized docker stack repo to create the DSC and CAS repos
 
 	** X when we check if the schemas have been deployed, simply query to see if the expected schema exists or not, if not then run all of the deployment scripts if so just shutdown the container
 

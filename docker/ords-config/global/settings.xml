@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Global ORDS settings for dev stack</comment>
+  <entry key="standalone.static.context.path">/i</entry>
+  <entry key="standalone.static.path">/opt/oracle/ords/static</entry>
+</properties>
