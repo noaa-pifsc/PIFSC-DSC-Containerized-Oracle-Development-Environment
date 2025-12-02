@@ -41,7 +41,7 @@ validate_apex_version_format() {
 	# Validate APEX version format (Strictly X.X, e.g., 23.2, 24.1)
 	# The regex ^[0-9]+\.[0-9]+$ ensures exactly one dot separating two integers.
 	if [[ ! "$target_version" =~ ^[0-9]+\.[0-9]+$ ]]; then
-		echo "ERROR: Invalid APEX version format: '$version'. Expected format: XX.X (e.g., 23.2)"
+		echo "ERROR: Invalid APEX version format: '$target_version'. Expected format: XX.X (e.g., 23.2)"
 		exit 1
 	fi
 }
@@ -256,7 +256,7 @@ EOF
 				# check if the target apex version is less than 23.2
 				version_compare "${TARGET_APEX_VERSION}" "23.2"
 				
-				if [ $? -eq 2]; then 
+				if [ $? -eq 2 ]; then 
 					# apex version is 23.1 or older
 
 					# define a PL/SQL block to unlock the apex admin using the APEX_UTIL.RESET_PASSWORD procedure
@@ -294,8 +294,6 @@ EOF
 					"
 				
 				fi
-				
-				echo "The value of UNLOCK_BLOCK is: $UNLOCK_BLOCK"
 				
 				# The APEX upgrade completed, unlock the APEX_PUBLIC_USER account and attempt to create the APEX instance admin account or if it already exists then reset the password to ${ORACLE_PWD}
 

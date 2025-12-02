@@ -26,9 +26,9 @@ X rename the docker image to have a pifsc prefix
 X create a new script (custom_ prefix) to perform the actual custom db/apex deployments so it's easier to pull changes from upstream (it won't cause a conflict in the run_db_app_deployment.sh each time)
 
 
-_ refactor the bash functions
+X refactor the bash functions
 
-_ create functions for validating the required environment variables
+X create functions for validating the required environment variables
 
 
 
@@ -36,33 +36,40 @@ _ create functions for validating the required environment variables
 
 Testing:
 	_ test the different deployment/restart scenarios
-		_ dev
-			_ new deployment
-				_ apex
+		X dev (tested 12/1/25)
+			X new deployment
+				X apex
+					X (error message) TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
+					X (error message) TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
+					X valid APEX (successful and reset admin password to ${ORACLE_PWD}
+						X login to workspace
+				X db
+					X login to SYS
+					X login to SYSTEM
+			X restart
+				X change apex version
 					X TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
-					_ TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
-					_ valid APEX (successful and reset admin password to ${ORACLE_PWD}
-						_ login to workspace
-				_ db
-					_ login to SYS
-					_ login to SYSTEM
-			_ restart
-				_ apex
-					_ (error message) downgrade (e.g. 23.1)
-					_ (error message) TARGET_APEX_VERSION invalid version (e.g. 24.0, 99.99)
-					_ APEX upgrade (successful and reset admin password to ${ORACLE_PWD}
-				_ db
-					_ login to SYS
-					_ login to SYSTEM
+					X (error message) downgrade (e.g. 23.1, 22.1)
+					X (error message) TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
+					X APEX upgrade (successful and reset admin password to ${ORACLE_PWD}
+						X login to workspace
+						X db
+							X login to SYS
+							X login to SYSTEM
+				X leave apex version unchanged
+					X login to workspace (password unchanged)
+					X db
+						X login to SYS
+						X login to SYSTEM
 		_ test (does not save database volume)
-			_ new deployment
-				_ apex
-					_ TARGET_APEX_VERSION invalid version (e.g. 24.0, 99.99)
-					_ valid APEX (successful upgrade and reset admin password to ${ORACLE_PWD}
-						_ login to workspace
-				_ db
-					_ login to SYS
-					_ login to SYSTEM
+			_ apex
+				_ (error message) TARGET_APEX_VERSION invalid version (regexp validation - e.g. 24.0.0)
+				X (error message) TARGET_APEX_VERSION invalid version (oracle site does not 
+				_ valid APEX (successful upgrade and reset admin password to ${ORACLE_PWD}
+					_ login to workspace
+			_ db
+				_ login to SYS
+				_ login to SYSTEM
 
 
 
