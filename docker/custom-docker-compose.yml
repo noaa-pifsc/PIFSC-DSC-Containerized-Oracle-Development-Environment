@@ -1,0 +1,6 @@
+services:
+  db-ords-deploy:
+    # MOUNT: Map the SQL files from the PRI submodule to where 
+    # the CODE deploy container expects to find them.
+    volumes:
+      # add in entries to map the submodule volumes to allow the database schemas/objects or apex apps to be deployed from container

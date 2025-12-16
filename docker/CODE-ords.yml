@@ -1,22 +1,4 @@
 services:
-  db:
-    container_name: db
-    image: ${DB_IMAGE}
-    ports: 
-      - ${DB_HOST_PORT}:${DBPORT}
-    environment:
-      # SYS password defined in .env file
-      - ORACLE_PWD=${ORACLE_PWD}
-    hostname: ${DBHOST}
-    networks:
-      - oracle-net
-    restart: always
-    healthcheck:
-      # SYS password defined in .env file
-      test: ["CMD", "sqlplus", "-L", "sys/${ORACLE_PWD}@localhost:${DBPORT}/${DBSERVICENAME} as sysdba", "@?/sqlplus/admin/glogin.sql"]
-      interval: 10s
-      timeout: 5s
-      retries: 30
   ords:
     container_name: ords
     restart: always
@@ -46,30 +28,6 @@ services:
       - ORACLE_PWD=${ORACLE_PWD}
       # set the password for the ODS_PUBLIC_USER database account to be the same as the SYS password defined in .env file
       - ORDS_PWD=${ORACLE_PWD}
-  db-ords-deploy:
-    image: pifsc/db-ords-deploy:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.deploy
-    container_name: db-ords-deploy
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - oracle-net
-    volumes:
-      # Mounts the shared volume as a folder inside this container
-      # so the script can write the static files to it.
-      - apex-static-vol:/apex-static
-    environment:
-      # Both variables are defined in .env file
-      - TARGET_APEX_VERSION=${TARGET_APEX_VERSION}
-      - ORACLE_PWD=${ORACLE_PWD}
-      - DBHOST=${DBHOST}
-      - DBPORT=${DBPORT}
-      - DBSERVICENAME=${DBSERVICENAME}
-      - APP_SCHEMA_NAME=${APP_SCHEMA_NAME}
-    restart: "no"
 volumes:
   # Defines the new shared volume for the APEX static application files
   apex-static-vol:

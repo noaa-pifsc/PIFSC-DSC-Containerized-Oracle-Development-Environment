@@ -1,4 +1,35 @@
 To do:
+
+
+	_ add use case for non-APEX apps
+		if TARGET_APEX_VERSION is not defined then should we just skip all of the APEX installation/upgrade steps completely?
+			YES
+			X document this business rule (this would reduce the amount of time)
+				If you only want a database and a database deployment service then comment out/remove the ords container in docker-compose-XX.yml
+				remove TARGET_APEX_VERSION from .env
+				
+				
+			
+
+		Move the function code for the apex upgrade into its own 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	X ** Update all repositories to add "containerized" to the name and use CODE as the acronym
 
 	X Update the repo paths
@@ -154,25 +185,32 @@ git bash commands:
 	# Dev:
 
 		# stop and remove CODE containers and delete volumes
-		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment/deployment_scripts
+		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment
 		
-		docker compose -f ../docker/docker-compose-dev.yml down
-		docker volume rm apex-static-vol
-		docker volume rm db-vol
+		docker compose \
+		  --env-file ./docker/.env \
+		  -f docker/CODE-db-deploy.yml \
+		  -f docker/CODE-db-named-volumes.yml \
+		  -f docker/custom-docker-compose.yml \
+		  down -v
 		
 		# build and deploy the development scenario of the CODE
-		bash build_deploy_project_dev.sh
+		bash ./deployment_scripts/build_deploy_project.sh dev
 	
 	# Test:
 
 		# stop and remove CODE containers and delete volumes
-		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment/deployment_scripts
+		cd /c/Users/jesse.abdul/Documents/Version\ Control/Git/PIFSC-Containerized-Oracle-Development-Environment
 		
-		docker compose -f ../docker/docker-compose-test.yml down
-		docker volume rm apex-static-vol
+		docker compose \
+		  --env-file ./docker/.env \
+		  -f docker/CODE-db-deploy.yml \
+		  -f docker/custom-docker-compose.yml \
+		  down -v
+
 
 		# build and deploy the test scenario of the CODE
-		bash build_deploy_project_test.sh
+		bash ./deployment_scripts/build_deploy_project.sh test
 
 
 troubleshooting tips:

@@ -1,0 +1,3 @@
+[submodule "modules/pifsc-container-deployment-scripts"]
+	path = modules/pifsc-container-deployment-scripts
+	url = git@picgitlab.nmfs.local:centralized-data-tools/pifsc-container-deployment-scripts.git
