@@ -1,0 +1,8 @@
+services:
+  db-ords-deploy:
+    # define the mounted volumes for the DB/Apex apps 
+    volumes:
+      - ../modules/DSC/SQL:/usr/src/DSC/SQL
+networks:
+  oracle-net:
+    name: oracle-net

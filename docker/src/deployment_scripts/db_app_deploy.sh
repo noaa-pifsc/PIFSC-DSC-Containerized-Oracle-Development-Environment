@@ -21,10 +21,6 @@ echo "Running the custom database/apex deployment process"
 # define a query to check if APEX is installed
 APEX_QUERY="SELECT COUNT(*) FROM DBA_REGISTRY WHERE COMP_ID = 'APEX' AND STATUS = 'VALID';"
 
-# Reads the target apex version from the environment variable set in docker-compose.yml
-# Defaults to 24.2 if not set
-TARGET_APEX_VERSION=${TARGET_APEX_VERSION:-"23.2"}
-
 # Wait until the database is available
 echo "Waiting for Oracle Database to be ready..."
 until echo "exit" | sqlplus -s $SYS_CREDENTIALS > /dev/null; do
@@ -33,8 +29,14 @@ until echo "exit" | sqlplus -s $SYS_CREDENTIALS > /dev/null; do
 done
 echo "Database is ready!"
 
-# install or upgrade the apex container installation:
-install_or_upgrade_apex
+# install or upgrade the apex container installation (if TARGET_APEX_VERSION is defined):
+if [ -n "$TARGET_APEX_VERSION" ]; then
+	echo "TARGET_APEX_VERSION is defined, install/upgrade apex"
+	install_or_upgrade_apex
+else
+	echo "TARGET_APEX_VERSION is not defined, skip apex install/upgrade process"
+
+fi
 
 echo "Checking if the database has been initialized (schema: ${APP_SCHEMA_NAME})..."
 # Check if the database is initialized by querying DBA_USERS

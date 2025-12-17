@@ -8,9 +8,9 @@ The PIFSC DSC Containerized Oracle Developer Environment (DCODE) project was dev
     -   URL: https://github.com/noaa-pifsc/PIFSC-DSC-Containerized-Oracle-Development-Environment
     -   Version: 1.2 (git tag: DSC_CODE_v1.2)
     -   Upstream repository:
-        -   DCODE Version Control Information:
-            -   URL: https://github.com/noaa-pifsc/PIFSC-DSC-Containerized-Oracle-Development-Environment
-            -   Version: 1.2 (git tag: DCODE_v1.2)
+        -   CODE Version Control Information:
+            -   URL: https://github.com/noaa-pifsc/PIFSC-Containerized-Oracle-Development-Environment
+            -   Version: 1.2 (git tag: CODE_v1.2)
 
 ## Dependencies
 \* Note: all dependencies are implemented as git submodules in the [modules](./modules) folder

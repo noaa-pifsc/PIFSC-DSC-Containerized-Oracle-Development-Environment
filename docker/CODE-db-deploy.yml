@@ -7,8 +7,6 @@ services:
     environment:
       # SYS password defined in .env file
       - ORACLE_PWD=${ORACLE_PWD}
-    volumes:
-      - db-vol:/opt/oracle/oradata
     hostname: ${DBHOST}
     networks:
       - oracle-net
@@ -19,35 +17,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 30
-  ords:
-    container_name: ords
-    restart: always
-    depends_on:
-      # Wait for the deploy container to finish to
-      # ensure the static files are in place before ORDS starts.
-      db-ords-deploy:
-        condition: service_completed_successfully
-    networks:
-      - oracle-net
-    volumes:
-      # map the ords-config directory to the ords container configuration folder to enable the configuration from the repository
-      - ./ords-config:/etc/ords/config
-      # This points to the new shared Docker volume instead 
-      # of a local host folder.
-      - apex-static-vol:/opt/oracle/ords/static
-    ports:
-      - ${ORDS_HOST_PORT}:8080
-    image: ${ORDS_IMAGE}
-    # These variables tell ORDS how to connect to the DB
-    # to create its configuration on the first run.
-    environment:
-      - DBHOST=${DBHOST}
-      - DBPORT=${DBPORT}
-      - DBSERVICENAME=${DBSERVICENAME}
-      # SYS password defined in .env file
-      - ORACLE_PWD=${ORACLE_PWD}
-      # set the password for the ODS_PUBLIC_USER database account to be the same as the SYS password defined in .env file
-      - ORDS_PWD=${ORACLE_PWD}
   db-ords-deploy:
     image: pifsc/db-ords-deploy:latest
     build:
@@ -73,9 +42,6 @@ services:
       - APP_SCHEMA_NAME=${APP_SCHEMA_NAME}
     restart: "no"
 volumes:
-  db-vol:
-    name: db-vol
-    external: false
   # Defines the new shared volume for the APEX static application files
   apex-static-vol:
     name: apex-static-vol
