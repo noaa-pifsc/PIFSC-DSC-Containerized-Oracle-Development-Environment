@@ -1,34 +1,13 @@
 To do:
 
 
-	_ add use case for non-APEX apps
+	X add use case for non-APEX apps
 		if TARGET_APEX_VERSION is not defined then should we just skip all of the APEX installation/upgrade steps completely?
 			YES
 			X document this business rule (this would reduce the amount of time)
 				If you only want a database and a database deployment service then comment out/remove the ords container in docker-compose-XX.yml
 				remove TARGET_APEX_VERSION from .env
 				
-				
-			
-
-		Move the function code for the apex upgrade into its own 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	X ** Update all repositories to add "containerized" to the name and use CODE as the acronym
 
@@ -74,6 +53,7 @@ Testing:
 					X (error message) TARGET_APEX_VERSION invalid version (oracle site does not have the intaller - e.g. 24.0, 9.99)
 					X valid APEX (successful and reset admin password to ${ORACLE_PWD}
 						X login to workspace
+					_ TARGET_APEX_VERSION blank (apex is not installed)
 				X db
 					X login to SYS
 					X login to SYSTEM
@@ -87,6 +67,7 @@ Testing:
 						X db
 							X login to SYS
 							X login to SYSTEM
+					X TARGET_APEX_VERSION blank (apex is unchanged)
 				X leave APEX version unchanged
 					X login to workspace (password unchanged)
 					X db
@@ -98,6 +79,7 @@ Testing:
 				X (error message) TARGET_APEX_VERSION invalid version (oracle site does not 
 				X valid APEX (successful upgrade and reset admin password to ${ORACLE_PWD}
 					X login to workspace
+				X TARGET_APEX_VERSION blank (apex is not installed)
 			X db
 				X login to SYS
 				X login to SYSTEM
@@ -190,7 +172,8 @@ git bash commands:
 		docker compose \
 		  --env-file ./docker/.env \
 		  -f docker/CODE-db-deploy.yml \
-		  -f docker/CODE-db-named-volumes.yml \
+		  -f docker/CODE-db-named-volume.yml \
+		  -f docker/CODE-ords.yml \
 		  -f docker/custom-docker-compose.yml \
 		  down -v
 		
@@ -205,6 +188,7 @@ git bash commands:
 		docker compose \
 		  --env-file ./docker/.env \
 		  -f docker/CODE-db-deploy.yml \
+		  -f docker/CODE-ords.yml \
 		  -f docker/custom-docker-compose.yml \
 		  down -v
 

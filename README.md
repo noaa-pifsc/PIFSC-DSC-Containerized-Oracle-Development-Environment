@@ -11,6 +11,13 @@ The PIFSC Containerized Oracle Developer Environment (CODE) project was develope
 -   [CODE Repository Fork Diagram](./docs/CODE_fork_diagram.drawio.png)
     -   [CODE Repository Fork Diagram source code](./docs/CODE_fork_diagram.drawio)
 
+## Dependencies
+\* Note: all dependencies are implemented as git submodules in the [modules](./modules) folder
+-   ### Container Deployment Scripts (CDS) Version Control Information
+    -   Version Control Information:
+        -   URL: <git@picgitlab.nmfs.local:centralized-data-tools/pifsc-container-deployment-scripts.git>
+        -   Database: 1.1 (Git tag: pifsc_container_deployment_scripts_v1.1)
+
 # Prerequisites
 -   Docker 
 -   Create an account or login to the [Oracle Image Registry](https://container-registry.oracle.com)
@@ -80,7 +87,7 @@ There are two different runtime scenarios implemented in this project:
         -   add git submodules in a designated folder (e.g. modules) for any git repository dependencies that the given project has
         -   Update [custom-docker-compose.yml](./docker/custom-docker-compose.yml) to define volumes to mount the corresponding submodule repository folders necessary to deploy the database(s)/apex application(s) 
         -   Update the [custom_deployment_functions.sh](./deployment_scripts/functions/custom_deployment_functions.sh) script to implement any custom docker compose commands to deploy the customized containers
-            -   \*Note: if the project does not need ORDS or Apex the [CODE-db-deploy.yml](./docker/CODE-db-deploy.yml) can be omitted from the list of docker compose configuration file parameters
+            -   \*Note: if the project does not need ORDS or Apex the [CODE-ords.yml](./docker/CODE-ords.yml) can be omitted from the list of docker compose configuration file parameters to exclude the ords docker container
         -   Update the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script to execute a series of SQLPlus scripts in the correct order to create/deploy schemas, create Apex workspaces, and deploy Apex apps that were mounted by [custom-docker-compose.yml](./docker/custom-docker-compose.yml).
             -   Update the [custom_container_config.sh](./docker/src/deployment_scripts/config/custom_container_config.sh) to specify the variables necessary to authenticate the corresponding SQLPlus scripts when the [custom_db_app_deploy.sh](./docker/src/deployment_scripts/custom_db_app_deploy.sh) bash script is executed
 -   ### Implementation Examples
