@@ -37,7 +37,6 @@ The PIFSC DSC Containerized Oracle Developer Environment (DCODE) project was dev
 ## Automated Deployment Process
 -   ### Prepare the folder structure
     -   Recursively clone (use --recurse-submodules option) the [DCODE repository](#dcode-version-control-information) to a working directory
-        -   Initialize and update the submodules recursively (git submodule update --init --recursive) 
 -   ### Build and Run the Containers 
     -   See the CODE [Build and Run the Containers](https://github.com/noaa-pifsc/PIFSC-Containerized-Oracle-Development-Environment?tab=readme-ov-file#build-and-run-the-containers) for details
     -   #### DSC Database Deployment
