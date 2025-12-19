@@ -4,8 +4,8 @@
 cd "$(dirname "$(realpath "$0")")"/..
 
 # load the CDS client functions
-source ./modules/pifsc-container-deployment-scripts/src/reusable_functions/shared_functions.sh
-source ./modules/pifsc-container-deployment-scripts/src/reusable_functions/client_functions.sh
+source ./modules/CDS/src/reusable_functions/shared_functions.sh
+source ./modules/CDS/src/reusable_functions/client_functions.sh
 
 # retrieve the ENV_NAME variable value from the first parameter or by prompting the user
 set_env_var "$1" 

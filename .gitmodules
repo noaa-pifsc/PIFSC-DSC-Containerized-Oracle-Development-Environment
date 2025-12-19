@@ -1,6 +1,6 @@
-[submodule "modules/pifsc-container-deployment-scripts"]
-	path = modules/pifsc-container-deployment-scripts
-	url = git@picgitlab.nmfs.local:centralized-data-tools/pifsc-container-deployment-scripts.git
 [submodule "modules/DSC"]
 	path = modules/DSC
 	url = git@picgitlab.nmfs.local:centralized-data-tools/pifsc-dsc.git
+[submodule "modules/CDS"]
+	path = modules/CDS
+	url = git@github.com:noaa-pifsc/PIFSC-Container-Deployment-Scripts.git
